@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        h2 {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        p#shortenedURL {
+            font-size: 16px;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>URL Shortener</h1>
+    <form action="/shorten" method="POST">
+        <label for="originalURL">Original URL:</label>
+        <input type="text" id="originalURL" name="originalURL" required style="width: 700px;">
+        <button type="submit">Shorten URL</button>
+        <div class="shortened-url">
+            <h2>Shortened URL:</h2>
+            <p id="shortenedURL"></p>
+        </div>
+    </form>
+    
+
+    <script>
+        const form = document.querySelector('form');
+        const shortenedURLElement = document.getElementById('shortenedURL');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const originalURL = document.getElementById('originalURL').value;
+            const response = await fetch('/shorten', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ originalURL })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const newURLLink = document.createElement('a');
+                newURLLink.href = data.NewURL;
+                newURLLink.textContent = data.NewURL;
+                shortenedURLElement.appendChild(newURLLink);
+            } else {
+                shortenedURLElement.textContent = 'Error shortening URL';
+            }
+        });
+    </script>
+</body>
+</html>
