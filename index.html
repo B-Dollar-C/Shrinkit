@@ -2,73 +2,36 @@
 <html>
 <head>
     <title>URL Shortener</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        form {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-
-        button[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        h2 {
-            margin-top: 20px;
-            font-size: 20px;
-            color: #333;
-        }
-
-        p#shortenedURL {
-            font-size: 16px;
-            color: #007bff;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>URL Shortener</h1>
+    <div class="hero">
+        <div class="text">
+            <h1>Shorter Links, Greater Results</h1>
+            <p>Get your URL shorter with us. No more long text</p>
+        </div>
+        <div class="image">
+            <img src="https://alokverma-uiproject-13.netlify.app/assets/SAAS%20landing%20page/30495%20[Converted]-01(1).svg"
+                alt="hero_image">
+        </div>
+    </div>
     <form action="/shorten" method="POST">
-        <label for="originalURL">Original URL:</label>
-        <input type="text" id="originalURL" name="originalURL" required style="width: 700px;">
-        <button type="submit">Shorten URL</button>
+        <div class="input">
+            <input type="text" id="originalURL" name="originalURL" required>
+            <button type="submit">Shorten URL</button>
+        </div>
         <div class="shortened-url">
-            <h2>Shortened URL:</h2>
-            <p id="shortenedURL"></p>
+            <div id="shortenedURLDIV">
+                <p id="shortenedURL"></p>
+                <button id="copy" onclick="copyText()">Copy</button>
+            </div>
         </div>
     </form>
-    
+
 
     <script>
         const form = document.querySelector('form');
@@ -96,6 +59,10 @@
                 shortenedURLElement.textContent = 'Error shortening URL';
             }
         });
+        function copyText() {
+            var URL = document.getElementById("shortenedURL");
+            const res = navigator.clipboard.writeText(URL.innerText);
+        }
     </script>
 </body>
 </html>
