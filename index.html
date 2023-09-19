@@ -48,7 +48,7 @@
             font-size: 30px;
         }
 
-        form {
+        .form {
             max-width: 900px;
             height: 20vh;
             margin: 10px auto;
@@ -144,7 +144,7 @@
                 font-size: 20px;
             }
 
-            form {
+            .form {
                 width: 85%;
                 height: 40vh;
                 margin: 10px auto;
@@ -179,18 +179,20 @@
                 alt="hero_image">
         </div>
     </div>
-    <form action="/shorten" method="POST">
-        <div class="input">
-            <input type="text" id="originalURL" name="originalURL" required>
-            <button type="submit">Shorten URL</button>
-        </div>
+    <div class="form">
+        <form action="/shorten" method="POST">
+            <div class="input">
+                <input type="text" id="originalURL" name="originalURL" required>
+                <button type="submit">Shorten URL</button>
+            </div>
+        </form>
         <div class="shortened-url">
             <div id="shortenedURLDIV">
                 <p id="shortenedURL"></p>
                 <button id="copy" onclick="copyText()">Copy</button>
             </div>
         </div>
-    </form>
+    </div>
 
 
     <script>
