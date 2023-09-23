@@ -189,7 +189,7 @@
         <div class="shortened-url">
             <div id="shortenedURLDIV">
                 <p id="shortenedURL"></p>
-                <button id="copy" onclick="copyText()">Copy</button>
+                <button id="copy" onclick="copyText()">Copy & Clear</button>
             </div>
         </div>
     </div>
@@ -201,7 +201,7 @@
 
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
-
+            clear();
             const originalURL = document.getElementById('originalURL').value;
             const response = await fetch('/shorten', {
                 method: 'POST',
@@ -224,6 +224,16 @@
         function copyText() {
             var URL = document.getElementById("shortenedURL");
             const res = navigator.clipboard.writeText(URL.innerText);
+            clear();
+            clearOriginalURL();
+        }
+        function clear(){
+            var URL = document.getElementById("shortenedURL");
+            URL.innerText = '';
+        }
+        function clearOriginalURL(){
+            const originalURL = document.getElementById('originalURL');
+            originalURL.value=null;
         }
     </script>
 </body>
