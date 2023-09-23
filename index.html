@@ -234,7 +234,7 @@
             event.preventDefault();
             clear();
             const originalURL = document.getElementById('originalURL').value;
-            const response = await fetch('/shorten', {
+            const response = await fetch('http://localhost:8080/shorten', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
