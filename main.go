@@ -62,7 +62,7 @@ func generateShortURL(c *fiber.Ctx) error {
 	}
 
 	redirection.ShortUrl = randomString
-	redirection.NewURL = "http://localhost:8080/" + randomString
+	redirection.NewURL = "https://shrinkit-ashy.vercel.app/" + randomString
 
 	_, err := collection.InsertOne(context.Background(), redirection)
 	if err != nil {
