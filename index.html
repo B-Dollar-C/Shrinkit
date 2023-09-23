@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>URL Shortener</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -166,13 +168,41 @@
                 margin-bottom: 20px;
             }
         }
+
+         /* Add CSS styles to make the title more attractive */
+         h1 {
+          font-size: 36px; /* Adjust the font size as needed */
+          color: #333; /* Text color */
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle text shadow */
+          display: inline-block; /* Ensure inline-block for emoji alignment */
+        }
+    
+        /* Style the emoji */
+        .emoji {
+          font-size: 36px; /* Adjust the font size to match the title */
+          margin-right: 10px; /* Add spacing between the emoji and text */
+        }
+        .copyright {
+         background-color: #333; /* Background color for the copyright section */
+  color: white; /* Text color */
+  text-align: center; /* Center-align the text */
+  padding: 10px; /* Add padding for spacing */
+  font-family: Arial, Helvetica, sans-serif; /* Font family */
+}
+
+.copyright p {
+  margin: 0; /* Remove default margin for the paragraph */
+}
     </style>
 </head>
 <body>
     <div class="hero">
         <div class="text">
-            <h1>Shorter Links, Greater Results</h1>
-            <p>Get your URL shorter with us. No more long text</p>
+            <h1> <span class="emoji">🚀</span>Shrinkit</h1>
+            <br><br>
+            <p style="background-color: rgb(143, 109, 182); padding: 10px; color: white; font-family: Arial, Helvetica, sans-serif; border-radius: 15px;">
+                No more long URLs ! Shrink It with us for <span style="color: #FFD700; font-weight: bold;">FREE 🎉</span>
+            </p>
         </div>
         <div class="image">
             <img src="https://alokverma-uiproject-13.netlify.app/assets/SAAS%20landing%20page/30495%20[Converted]-01(1).svg"
@@ -183,13 +213,13 @@
         <form action="/shorten" method="POST">
             <div class="input">
                 <input type="text" id="originalURL" name="originalURL" required>
-                <button type="submit">Shorten URL</button>
+                <button type="submit" style="font-size: 16px;">Shorten URL</button>
             </div>
         </form>
         <div class="shortened-url">
             <div id="shortenedURLDIV">
                 <p id="shortenedURL"></p>
-                <button id="copy" onclick="copyText()">Copy & Clear</button>
+                <button id="copy" onclick="copyText()" style="font-size: 16px;">Copy & Clear</button>
             </div>
         </div>
     </div>
@@ -224,6 +254,13 @@
         function copyText() {
             var URL = document.getElementById("shortenedURL");
             const res = navigator.clipboard.writeText(URL.innerText);
+            Swal.fire({
+                icon: 'success',
+                title: 'Copied!',
+                text: 'The URL has been copied to the clipboard.',
+                showConfirmButton: false,
+                timer: 2000 // Set the timer to auto-close the dialog after 1.5 seconds
+            });
             clear();
             clearOriginalURL();
         }
@@ -236,5 +273,9 @@
             originalURL.value=null;
         }
     </script>
+<footer class="copyright">
+    <p>&copy; 2023 B$C (Northern AI). All rights reserved.</p>
+  </footer>
+    
 </body>
 </html>
