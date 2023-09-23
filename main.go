@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -76,6 +77,11 @@ func main() {
 
 	app := fiber.New()
 	app.Static("/", "./index.html")
+
+	corsConfig := cors.New(cors.Config{
+		AllowOrigins: "https://shrinkit-ashy.vercel.app", // Allow requests from your domain
+	})
+	app.Use(corsConfig)
 
 	app.Get("/:shortUrl", redirectToNewURL)
 	app.Post("/shorten", generateShortURL)
