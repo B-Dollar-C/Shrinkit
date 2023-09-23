@@ -273,26 +273,6 @@
             const originalURL = document.getElementById('originalURL');
             originalURL.value=null;
         }
-
-    const fullURL = `http://localhost:8080/?shortUrl=${shortUrl}`;
-
-    fetch(fullURL)
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Failed to fetch URL');
-            }
-        })
-        .then((data) => {
-            const newURLLink = document.createElement('a');
-            newURLLink.href = data.NewURL;
-            newURLLink.textContent = data.NewURL;
-            shortenedURLElement.appendChild(newURLLink);
-        })
-        .catch((error) => {
-            shortenedURLElement.textContent = 'Error fetching URL: ' + error.message;
-        });
     </script>
 <footer class="copyright">
     <p>&copy; 2023 B$C (Northern AI). All rights reserved.</p>
